@@ -1,0 +1,25 @@
+import FetchAll from "../../api/FetchAll"
+import MessageItem from "./MessageItem";
+
+export default function MessagePage() {
+
+    const {data: messages, error, loading} = FetchAll();
+    if(loading){
+        return <p>Loading...</p>
+    }
+    if(error){
+        return <p>{error.message}</p>
+    }
+
+    return (
+        <div>
+            <h1>Nyeste meldinger</h1>
+
+            <ul>
+                {messages.map(message => (
+                        <MessageItem key={message.id} message={message}>{message.category}, {message.district}</MessageItem>
+                ))}
+            </ul>
+        </div>
+    )
+    }

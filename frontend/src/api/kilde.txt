@@ -1,0 +1,21 @@
+https://api.politiet.no/politiloggen/index.html
+
+
+Eksempelobjekt:
+[
+  {
+    "id": "string",
+    "threadId": "string",
+    "category": "string",
+    "district": "string",
+    "municipality": "string",
+    "area": "string",
+    "isActive": true,
+    "text": "string",
+    "createdOn": "2025-02-05T05:40:56.407Z",
+    "updatedOn": "2025-02-05T05:40:56.407Z",
+    "imageUrl": "string",
+    "previouslyIncludedImage": true,
+    "isEdited": true
+  }
+]
