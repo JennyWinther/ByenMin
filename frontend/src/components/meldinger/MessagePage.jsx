@@ -1,6 +1,10 @@
 import Fetch from "../../api/Fetch"
 import MessageItem from "./MessageItem";
 
+// MessagePage inneholder all funksjonalitet rundt meldinger fra Politiloggen. Komponenten inneholder liste med meldinger,
+// samt mulighet for å filtrere meldinger basert på kategori, distrikt, kommune og dato.
+// Komponenten bruker Fetch-komponenten for å hente data fra egen REST-API, som deretter henter fra politiets API. (Se Fetch.jsx)
+
 export default function MessagePage() {
 
     const {data: messages, error, loading} = Fetch("hentTi");

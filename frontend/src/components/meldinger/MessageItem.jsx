@@ -1,4 +1,6 @@
 
+// MessageItem viser en enkelt melding fra politiloggen. Denne komponenten brukes av MessagePage for å vise en liste med meldinger.
+
 export default function MessageItem({ message }) {
     
     return (
