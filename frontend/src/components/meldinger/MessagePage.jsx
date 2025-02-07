@@ -3,7 +3,7 @@ import MessageItem from "./MessageItem";
 
 export default function MessagePage() {
 
-    const {data: messages, error, loading} = Fetch("hentAlle");
+    const {data: messages, error, loading} = Fetch("hentTi");
     if(loading){
         return <p>Loading...</p>
     }
