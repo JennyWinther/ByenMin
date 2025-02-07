@@ -2,18 +2,19 @@
 //hente alle meldinger fra databasen 
 import { useEffect, useState } from "react";
 
-export default function FetchAll() {
+export default function FetchAll(url) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);               //okey så. cors headers er ikke lov for å hente fra API. ergo, 
-                                                            // jeg må lage en backend som henter dataen og sender den til frontend.
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function getData(){
             setLoading(true);
 
+            const komplettUrl = `http://localhost:8080/politiloggen/` + url;
+
             try{
-                const response = await fetch(`https://api.politiet.no/politiloggen/v1/messages?SortBy=Date`);   //henter alle meldinger, sortert på nyest først
+                const response = await fetch(komplettUrl);   //henter alle NYE meldinger (10 siste)
                 const responseData = await response.json();
 
                 if(!response.ok){

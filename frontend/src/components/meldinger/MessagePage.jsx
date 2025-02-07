@@ -3,7 +3,7 @@ import MessageItem from "./MessageItem";
 
 export default function MessagePage() {
 
-    const {data: messages, error, loading} = FetchAll();
+    const {data: messages, error, loading} = FetchAll("hentAlle");
     if(loading){
         return <p>Loading...</p>
     }
@@ -17,7 +17,7 @@ export default function MessagePage() {
 
             <ul>
                 {messages.map(message => (
-                        <MessageItem key={message.id} message={message}>{message.category}, {message.district}</MessageItem>
+                        <MessageItem key={message.id} message={message} />
                 ))}
             </ul>
         </div>
