@@ -4,12 +4,8 @@ import com.MinBy.Entiteter.MeldingWrapper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 @RestController
 @RequestMapping("/politiloggen")
@@ -57,7 +53,7 @@ public class PolitiController {
     }
 
     //Finn 50 siste i Politidistrikt, mellom dato1 og dato2
-    @GetMapping(value = "/hentEtterDato/{distrikt}/{dato1}/{dato2}")
+    @GetMapping(value = "/hentEtterDistriktOgDato/{distrikt}/{dato1}/{dato2}")
     private List<Melding> HentEtterDistriktOgDato(@PathVariable String distrikt, @PathVariable String dato1, @PathVariable String dato2){
         if(LocalDate.parse(dato1).isAfter(LocalDate.parse(dato2))){     //Hvis dato1 er etter dato2, returner tom liste
             return List.of();
@@ -66,7 +62,7 @@ public class PolitiController {
         String query = "messages?Districts=%s&DateFrom=%s&DateTo=%s";
         String queryRes = String.format(query, distrikt, dato1, dato2);
 
-        MeldingWrapper resultat = restTemplate.getForObject(basePolitiUrl + "messages?DateFrom=", MeldingWrapper.class);
+        MeldingWrapper resultat = restTemplate.getForObject(basePolitiUrl + queryRes, MeldingWrapper.class);
         return resultat != null ? resultat.getData() : List.of();
     }
 
