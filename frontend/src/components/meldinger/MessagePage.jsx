@@ -1,9 +1,9 @@
-import FetchAll from "../../api/FetchAll"
+import Fetch from "../../api/Fetch"
 import MessageItem from "./MessageItem";
 
 export default function MessagePage() {
 
-    const {data: messages, error, loading} = FetchAll("hentAlle");
+    const {data: messages, error, loading} = Fetch("hentAlle");
     if(loading){
         return <p>Loading...</p>
     }
