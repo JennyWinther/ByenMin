@@ -1,32 +1,20 @@
-import Fetch from "../../api/Fetch"
-import MessageItem from "./MessageItem";
+import { useState } from "react";
 import SearchBar from "./SearchBar";
+import MessageList from "./MessageList";
 
-// MessagePage inneholder all funksjonalitet rundt meldinger fra Politiloggen. Komponenten inneholder liste med meldinger,
-// samt mulighet for å filtrere meldinger basert på kategori, distrikt, kommune og dato.
-// Komponenten bruker Fetch-komponenten for å hente data fra egen REST-API, som deretter henter fra politiets API. (Se Fetch.jsx)
+// MessagePage presenterer all funksjonalitet for søking i Politiloggen. Den viser et søkefelt og en liste med meldinger.
+// Hvis det blir gjort et søk, sendes søkeparametrene til MessageList, som henter data fra politiloggen.
+
+// By default, laster MessagePage inn de 10 nyeste meldingene fra politiloggen.
 
 export default function MessagePage() {
-
-    const {data: messages, error, loading} = Fetch("hentTi");
-    if(loading){
-        return <p>Loading...</p>
-    }
-    if(error){
-        return <p>{error.message}</p>
-    }
+    const [query, setQuery] = useState("hentTi");
 
     return (
         <div>
-
             <h1>Nyeste meldinger</h1>
-            <SearchBar />
-
-            <ul>
-                {messages.map(message => (
-                        <MessageItem key={message.id} message={message} />
-                ))}
-            </ul>
+            <SearchBar setQuery={setQuery} />
+            <MessageList query={query} />
         </div>
     )
     }
