@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 // Komponenten tar inn en URL som parameter, og henter data fra dette endepunktet. Dette er gjort for å 
 // omgå CORS-problematikk.
 
+// Hver komponent er anvarlig for å gi riktig URL til endepunkt.
+
 export default function FetchAll(url) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);

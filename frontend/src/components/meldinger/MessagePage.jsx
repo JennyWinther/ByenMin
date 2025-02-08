@@ -1,5 +1,6 @@
 import Fetch from "../../api/Fetch"
 import MessageItem from "./MessageItem";
+import SearchBar from "./SearchBar";
 
 // MessagePage inneholder all funksjonalitet rundt meldinger fra Politiloggen. Komponenten inneholder liste med meldinger,
 // samt mulighet for å filtrere meldinger basert på kategori, distrikt, kommune og dato.
@@ -17,7 +18,9 @@ export default function MessagePage() {
 
     return (
         <div>
+
             <h1>Nyeste meldinger</h1>
+            <SearchBar />
 
             <ul>
                 {messages.map(message => (

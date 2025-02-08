@@ -3,9 +3,13 @@ import com.MinBy.Entiteter.Melding;
 import com.MinBy.Entiteter.MeldingWrapper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/politiloggen")
@@ -66,6 +70,42 @@ public class PolitiController {
         return resultat != null ? resultat.getData() : List.of();
     }
 
+    @GetMapping(value = "/sok")         //OBS NOTAT TIL MEG: LAG SERVICE
+    private List<Melding> SokEtterFiltrertResultat(
+            @RequestParam(required = false) String kategori,
+            @RequestParam(required = false) String distrikt,
+            @RequestParam(required = false) String kommune,
+            @RequestParam(required = false) String datoFra,
+            @RequestParam(required = false) String datoTil //denne burde kanskje være dagens tidspunkt default val
+    ){
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .fromUriString(basePolitiUrl)      // https://... base
+                .path("/messages");              // /messages
+
+        if (kategori != null && !kategori.isBlank()) {
+            builder.queryParam("Categories", kategori);
+        }
+        if (distrikt != null && !distrikt.isBlank()) {
+            builder.queryParam("Districts", distrikt);
+        }
+        if (kommune != null && !kommune.isBlank()) {
+            builder.queryParam("Municipalities", kommune);
+        }
+        if (datoFra != null && !datoFra.isBlank()) {
+            builder.queryParam("DateFrom", datoFra);
+        }
+        if (datoTil != null && !datoTil.isBlank()) {
+            builder.queryParam("DateTo", datoTil);
+        }
+
+        // Bygg den endelige URLen
+        UriComponents components = builder.build(false);
+        String url = components.toUriString();
+
+        MeldingWrapper resultat = restTemplate.getForObject(url, MeldingWrapper.class);
+
+        return resultat.getData();
+    }
 
 
 }
