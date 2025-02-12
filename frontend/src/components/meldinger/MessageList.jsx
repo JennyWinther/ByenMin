@@ -10,7 +10,7 @@ export default function MessageList({ query }) {
     if(loading) return <p>Loading...</p>
 
     return (
-        <div>
+        <div className="max-w-3xl flex flex-col flex-wrap">
             <ul>
                 {messages.map(message => (
                     <MessageItem key={message.id} message={message} />

@@ -1,8 +1,13 @@
+import NavBar from "../navbar/navbar"
+
 
 export default function FrontPage() {
     return (
-        <div>
-            <h1>Front Page</h1>     //dette skal være forsiden som directer til politimelding siden +++ men dette er intro
-        </div>
+        <>
+            <NavBar />
+            <div className="basis-5/6 p-4 overflow-auto">
+                Dette er front page
+            </div>
+        </>
     )
     }

@@ -1,17 +1,11 @@
-
 import NavBar from './components/navbar/navbar';
-import MessagePage from './components/meldinger/MessagePage';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import FrontPage from './components/frontpage/FrontPage';
 
 function App() {
-
-
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <NavBar />
-      <MessagePage />
-    </LocalizationProvider>
+        <div className='flex flex-row h-[100vh]'>
+          <FrontPage />
+        </div>
   )
 }
 

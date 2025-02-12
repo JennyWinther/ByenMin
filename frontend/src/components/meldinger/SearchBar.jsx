@@ -44,23 +44,33 @@ export default function SearchBar({setQuery}) {
         setDatoTil(null);
     }
 
+    const labelStyle = "font-mono text-sm text-stone-500";
+    const inputStyle = "border border-stone-400 rounded-md p-2 py-4 w-30 m-1";
+    const datePickerStyle = "border border-stone-400 rounded-lg m-1";
+    const buttonStyle = "bg-stone-50 border px-2 py-1 rounded-md shadow-sm m-1 hover:bg-stone-100";
+
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}
+                className="flex flex-row gap-2 bg-neutral-50 rounded-lg shadow p-4 m-4 w-3/4"
+                >
                 <div>
-                    <label>Kategori</label>
+                    <label className={labelStyle}>Kategori</label>
                     <input
                         type="text"
                         value={kategori}
                         onChange={(e) => setKategori(e.target.value)}
+                        className={inputStyle}
                     />
                 </div>
                 
                 <div>
-                    <label>Distrikt</label>
+                    <label className={labelStyle}>Distrikt</label>
                     <select name="Distrikt" 
                             value={distrikt}
-                            onChange={(e) => setDistrikt(e.target.value)}>
+                            onChange={(e) => setDistrikt(e.target.value)}
+                            className={inputStyle}                        
+                        >        
                         <option value="">Velg politidistrikt</option>
                         <option value="Oslo">Oslo Politidistrikt</option>
                         <option value="Øst">Øst Politidistrikt</option>
@@ -76,11 +86,12 @@ export default function SearchBar({setQuery}) {
                 </div>
 
                 <div>
-                    <label>Kommune</label>
+                    <label className={labelStyle}>Kommune</label>
                     <select value={kommune}
-                            onChange={(e) => setKommune(e.target.value)}>
+                            onChange={(e) => setKommune(e.target.value)}
+                            className={inputStyle}>
                         
-                        <option value=""></option>
+                        <option value="">Velg kommune</option>
                         {kommuner.map((komm) => (
                         <option key={komm.kommunenummer} value={komm.kommunenavn}>
                             {komm.kommunenavnNorsk}
@@ -90,34 +101,31 @@ export default function SearchBar({setQuery}) {
                 </div>
 
                 <div>
-                    <label>Dato fra</label>
-                    {/* <input
-                        type="text"
-                        value={datoFra}
-                        onChange={(e) => setDatoFra(e.target.value)}
-                    /> */}
+                    <label className={labelStyle}>Dato fra</label>
                     <DatePicker 
                         disableFuture={true}
                         value={datoFra}
                         onChange={(newValue) => setDatoFra(newValue)}
+                        className={datePickerStyle}
                     />
                 </div>
 
                 <div>
-                    <label>Dato til</label>
-                    {/* <input
-                        type="text"
-                        value={datoTil}
-                        onChange={(e) => setDatoTil(e.target.value)}
-                    /> */}
+                    <label className={labelStyle}>Dato til</label>
                     <DatePicker 
                         disableFuture={true}
                         value={datoTil}
                         onChange={(newValue) => setDatoTil(newValue)}
+                        className={datePickerStyle}
                     />
                 </div>
-                <input type="submit" />
-                <button onClick={handleReset}>Nullstill</button>
+                <div className="flex flex-col justify-center">
+                    <input type="submit" 
+                            className={buttonStyle} />
+                    <button onClick={handleReset}
+                            className={buttonStyle}
+                        >Nullstill</button>
+                </div>
             </form>
         </>
     )
