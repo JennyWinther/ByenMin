@@ -1,4 +1,4 @@
-package com.MinBy.Entiteter;
+package com.MinBy.Entiteter.Politi;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.MinBy;
+package com.MinBy.Servicer;
 
-import com.MinBy.Entiteter.Melding;
-import com.MinBy.Entiteter.MeldingWrapper;
+import com.MinBy.Entiteter.Politi.Melding;
+import com.MinBy.Entiteter.Politi.MeldingWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -86,6 +86,14 @@ public class PolitiService {
 
         MeldingWrapper resultat = restTemplate.getForObject(url, MeldingWrapper.class);
 
+        return resultat.getData();
+    }
+
+    public List<Melding> HentTilWidget(String kommune) {
+        String query = "messages?Municipalities=%s&Take=5";
+        String queryRes = String.format(query, kommune);
+
+        MeldingWrapper resultat = restTemplate.getForObject(basePolitiUrl + queryRes, MeldingWrapper.class);
         return resultat.getData();
     }
 }

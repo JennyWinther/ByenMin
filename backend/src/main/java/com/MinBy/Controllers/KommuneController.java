@@ -1,6 +1,6 @@
 package com.MinBy.Controllers;
 
-import com.MinBy.Entiteter.Kommune;
+import com.MinBy.Entiteter.Politi.Kommune;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +15,10 @@ import java.util.List;
 @RequestMapping("/kommuner")
 @CrossOrigin
 public class KommuneController {
+
+//    Henter data fra Kartverket sin API, spesifikt en liste over alle kommuner i Norge. Har ingenting
+//    med værinformasjon å gjøre.
+
     private String kommuneUrl = "https://api.kartverket.no/kommuneinfo/v1/kommuner";
     RestTemplate restTemplate = new RestTemplate();
 

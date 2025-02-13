@@ -1,6 +1,6 @@
 package com.MinBy.Controllers;
-import com.MinBy.Entiteter.Melding;
-import com.MinBy.PolitiService;
+import com.MinBy.Entiteter.Politi.Melding;
+import com.MinBy.Servicer.PolitiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +10,10 @@ import java.util.*;
 @RequestMapping("/politiloggen")
 @CrossOrigin
 public class PolitiController {
+
+    // Henter data fra Politiloggens API. Exposer endepunktfor å kunne hente ut mer spesifikke data, som
+    // politidistrikt, hendelser i kommuner/mer lokale steder, eller innenfor et spenn av datoer.
+
     @Autowired
     PolitiService politiService;
 
@@ -36,6 +40,12 @@ public class PolitiController {
     @GetMapping(value = "/hentEtterDistrikt/{distrikt}")
     private List<Melding> HentEtterDistrikt(@PathVariable String distrikt){
         return politiService.HentEtterDistrikt(distrikt);
+    }
+
+    //Henter de siste 5 meldingene i brukers valgte kommune. Til bruk på forside.
+    @GetMapping(value = "/hentTilWidget/{kommune}")
+    private List<Melding> HentTilWidget(@PathVariable String kommune){
+        return politiService.HentTilWidget(kommune);
     }
 
     //Finn 50 siste i Politidistrikt, mellom dato1 og dato2
