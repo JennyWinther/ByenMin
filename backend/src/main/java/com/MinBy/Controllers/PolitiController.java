@@ -44,7 +44,7 @@ public class PolitiController {
         return politiService.HentEtterDistriktOgDato(distrikt, dato1, dato2);
     }
 
-    @GetMapping(value = "/sok")         //OBS NOTAT TIL MEG: LAG SERVICE
+    @GetMapping(value = "/sok")
     private List<Melding> SokEtterFiltrertResultat(
             @RequestParam(required = false) String kategori,
             @RequestParam(required = false) String distrikt,
