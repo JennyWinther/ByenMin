@@ -1,10 +1,12 @@
 package com.MinBy.Entiteter.Vaer;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
+@Embeddable
 public class VaerData {
 
     // Nest ytterste wrapping.
