@@ -6,7 +6,7 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NaaværendeVaerDetaljer {
+public class NaverendeVaerDetaljer {
 
     // En referanse til JSON: timeseries.data.instant, som inneholder generell
     // informasjon som luftfuktighet og temperatur.
@@ -22,10 +22,10 @@ public class NaaværendeVaerDetaljer {
     @JsonProperty("wind_from_direction")
     private double windFromDirection;
 
-    public NaaværendeVaerDetaljer() {
+    public NaverendeVaerDetaljer() {
     }
 
-    public NaaværendeVaerDetaljer(double airTemperature, double relativeHumidity, double windSpeed, double windFromDirection) {
+    public NaverendeVaerDetaljer(double airTemperature, double relativeHumidity, double windSpeed, double windFromDirection) {
         this.airTemperature = airTemperature;
         this.relativeHumidity = relativeHumidity;
         this.windSpeed = windSpeed;

@@ -1,6 +1,6 @@
 package com.MinBy.Entiteter.Vaer;
 
-import com.MinBy.Entiteter.Vaer.DetaljKlasser.NaaværendeVaerDetaljer;
+import com.MinBy.Entiteter.Vaer.DetaljKlasser.NaverendeVaerDetaljer;
 import com.MinBy.Entiteter.Vaer.DetaljKlasser.VaerVarsel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +14,7 @@ public class VaerDataDetaljer {
     // Innerste lag av Vær-entitet.
 
     @JsonProperty("instant")
-    private NaaværendeVaerDetaljer instant;
+    private NaverendeVaerDetaljer instant;
 
     @JsonProperty("next_1_hours")
     private VaerVarsel next1Hours;
@@ -28,7 +28,7 @@ public class VaerDataDetaljer {
     public VaerDataDetaljer() {
     }
 
-    public VaerDataDetaljer(NaaværendeVaerDetaljer instant, VaerVarsel next1Hours, VaerVarsel next6Hours, VaerVarsel next12Hours) {
+    public VaerDataDetaljer(NaverendeVaerDetaljer instant, VaerVarsel next1Hours, VaerVarsel next6Hours, VaerVarsel next12Hours) {
         this.instant = instant;
         this.next1Hours = next1Hours;
         this.next6Hours = next6Hours;
@@ -36,11 +36,11 @@ public class VaerDataDetaljer {
     }
 
     @Embedded
-    public NaaværendeVaerDetaljer getInstant() {
+    public NaverendeVaerDetaljer getInstant() {
         return instant;
     }
 
-    public void setInstant(NaaværendeVaerDetaljer instant) {
+    public void setInstant(NaverendeVaerDetaljer instant) {
         this.instant = instant;
     }
 

@@ -28,3 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </LocalizationProvider>
   </StyledEngineProvider>
 )
+
+
+//Vær-widget ikoner: https://nrkno.github.io/yr-weather-symbols/
+

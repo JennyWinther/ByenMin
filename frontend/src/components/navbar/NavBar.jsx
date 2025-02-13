@@ -10,7 +10,6 @@ export default function Navbar() {
                 <li>
                     <a href="http://localhost:5173/politiloggen">Politiloggen</a>
                 </li>
-
             </ul>
         </div>
     )
