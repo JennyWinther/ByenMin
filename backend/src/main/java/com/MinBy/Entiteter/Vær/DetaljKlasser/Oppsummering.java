@@ -1,12 +1,10 @@
-package com.MinBy.Entiteter.Vaer.DetaljKlasser;
+package com.MinBy.Entiteter.Vær.DetaljKlasser;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Embeddable;
 
-@Embeddable
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class VaerOppsummering {
+public class Oppsummering {
 
     // Referanse til JSON: timeseries.data.nextXXhours.summary.
     // Inneholder informasjon for symbolbruk (fint/dårlig vær, sikkerhet i varsling)
@@ -17,10 +15,10 @@ public class VaerOppsummering {
     @JsonProperty("symbol_confidence")
     private String symbolConfidence;
 
-    public VaerOppsummering() {
+    public Oppsummering() {
     }
 
-    public VaerOppsummering(String symbolCode, String symbolConfidence) {
+    public Oppsummering(String symbolCode, String symbolConfidence) {
         this.symbolCode = symbolCode;
         this.symbolConfidence = symbolConfidence;
     }

@@ -1,10 +1,10 @@
-package com.MinBy.Entiteter.Geo;
+package com.MinBy.Entiteter.GeoapifySted;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class GeoKommune {
+public class Stedsinformasjon {
 
     // Denne klassen inneholder resultatinformasjon fra Geoapify (Se VaerService)
     // Det viktigste her er Latitude og Longitude (lat/lon), da dette må videre til api.met.no.
@@ -17,10 +17,10 @@ public class GeoKommune {
     private Double lat;
     private Double lon;
 
-    public GeoKommune() {
+    public Stedsinformasjon() {
     }
 
-    public GeoKommune(String place_id, String county, String city, Double lat, Double lon) {
+    public Stedsinformasjon(String place_id, String county, String city, Double lat, Double lon) {
         this.place_id = place_id;
         this.county = county;
         this.city = city;

@@ -1,46 +1,41 @@
-package com.MinBy.Entiteter.Vaer.DetaljKlasser;
+package com.MinBy.Entiteter.Vær.DetaljKlasser;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Embedded;
 
-@Embeddable
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class VaerVarsel {
+public class Fremtidsvarsel {
 
     // Referanse til intern wrapper: timeseries.data.nextXXhours.
     // Inneholder oppsummering (Se VaerOppsummering entitet) og sjanse for regn/torden, evt mengde.
 
     @JsonProperty("summary")
-    private VaerOppsummering summary;
+    private Oppsummering summary;
 
     @JsonProperty("details")
-    private VaerOppsummering details;
+    private Detaljer details;
 
-    public VaerVarsel() {
+    public Fremtidsvarsel() {
     }
 
-    public VaerVarsel(VaerOppsummering summary, VaerOppsummering details) {
+    public Fremtidsvarsel(Oppsummering summary, Detaljer details) {
         this.summary = summary;
         this.details = details;
     }
 
-    @Embedded
-    public VaerOppsummering getSummary() {
+    public Oppsummering getSummary() {
         return summary;
     }
 
-    public void setSummary(VaerOppsummering summary) {
+    public void setSummary(Oppsummering summary) {
         this.summary = summary;
     }
 
-    @Embedded
-    public VaerOppsummering getDetails() {
+    public Detaljer getDetails() {
         return details;
     }
 
-    public void setDetails(VaerOppsummering details) {
+    public void setDetails(Detaljer details) {
         this.details = details;
     }
 }

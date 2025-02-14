@@ -1,7 +1,5 @@
 package com.MinBy.DTOs;
 
-import com.MinBy.Entiteter.Vaer.DetaljKlasser.VaerOppsummering;
-
 public class VaerDataResponsDTO {
 
     // Denne klassen representerer objektet som sendes til frontend,
@@ -10,10 +8,10 @@ public class VaerDataResponsDTO {
     private String tidspunkt;
     private double luftTemperatur;
     private double vindHastighet;
-    private VaerOppsummering nedbor;
+    private double nedbor;
     private String vaerSymbol;
 
-    public VaerDataResponsDTO(String tidspunkt, double luftTemperatur, double vindHastighet, VaerOppsummering nedbor, String vaerSymbol) {
+    public VaerDataResponsDTO(String tidspunkt, double luftTemperatur, double vindHastighet, double nedbor, String vaerSymbol) {
         this.tidspunkt = tidspunkt;
         this.luftTemperatur = luftTemperatur;
         this.vindHastighet = vindHastighet;
@@ -45,11 +43,11 @@ public class VaerDataResponsDTO {
         this.vindHastighet = vindHastighet;
     }
 
-    public VaerOppsummering getNedbor() {
+    public double getNedbor() {
         return nedbor;
     }
 
-    public void setNedbor(VaerOppsummering nedbor) {
+    public void setNedbor(double nedbor) {
         this.nedbor = nedbor;
     }
 
@@ -59,5 +57,16 @@ public class VaerDataResponsDTO {
 
     public void setVaerSymbol(String vaerSymbol) {
         this.vaerSymbol = vaerSymbol;
+    }
+
+    @Override
+    public String toString() {
+        return "VaerDataResponsDTO{" +
+                "tidspunkt='" + tidspunkt + '\'' +
+                ", luftTemperatur=" + luftTemperatur +
+                ", vindHastighet=" + vindHastighet +
+                ", nedbor=" + nedbor +
+                ", vaerSymbol='" + vaerSymbol + '\'' +
+                '}';
     }
 }
