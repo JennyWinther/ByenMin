@@ -8,7 +8,7 @@ import NavBar from "../navbar/navbar";
 // By default, laster MessagePage inn de 10 nyeste meldingene fra politiloggen.
 
 export default function MessagePage() {
-    const [query, setQuery] = useState("hentTi");
+    const [query, setQuery] = useState("http://localhost:8080/politiloggen/hentTi");
 
     return (
         <div className='flex flex-row size-fit h-[100vh]'>

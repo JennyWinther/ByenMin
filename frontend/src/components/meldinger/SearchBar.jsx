@@ -29,7 +29,7 @@ export default function SearchBar({setQuery}) {
         const fraStr = datoFra ? datoFra.format("YYYY-MM-DD") : "";
         const tilStr = datoTil ? datoTil.format("YYYY-MM-DD") : "";
         
-        queryStreng = `sok?kategori=${kategori}&distrikt=${distrikt}&kommune=${kommune}&datoFra=${fraStr}&datoTil=${tilStr}`;
+        queryStreng = `http://localhost:8080/politiloggen/sok?kategori=${kategori}&distrikt=${distrikt}&kommune=${kommune}&datoFra=${fraStr}&datoTil=${tilStr}`;
         setQuery(() => {
             return queryStreng;
         });

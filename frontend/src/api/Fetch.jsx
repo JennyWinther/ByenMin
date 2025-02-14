@@ -15,10 +15,9 @@ export default function useFetch(url) {
         if (!url) return;
         async function getData(){
             setLoading(true);
-            const komplettUrl = `http://localhost:8080/politiloggen/` + url;
 
             try{
-                const response = await fetch(komplettUrl);
+                const response = await fetch(url);
                 const responseData = await response.json();
                 if(!response.ok){
                     throw new Error('Failed to load')

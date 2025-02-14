@@ -6,7 +6,7 @@ export default function MeldingsWidget(){
     return (
         <div>
             <h1>Siste hendelser</h1>
-            <MessageList query="hentTilWidget/horten"/>
+            <MessageList query="http://localhost:8080/politiloggen/hentTilWidget/horten"/>
         </div>
     )
 }
