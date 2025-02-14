@@ -1,6 +1,13 @@
 # ByenMin
 En applikasjon som skal gi deg lett oversikt over de siste hendelsene, været, og flere funksjoner (etterhvert...) på ett sted.
 
+## Teknologier
+- Spring Boot 
+- React JS
+- Vite
+- TailwindCSS
+- Javascript
+
 ## API 
 ### Politiloggen
 https://api.politiet.no/politiloggen/index.html
@@ -18,3 +25,6 @@ https://heropatterns.com/
 
 ## Værsymboler
 https://nrkno.github.io/yr-weather-symbols/
+
+## Datepicker komponent
+https://mui.com/x/react-date-pickers/date-picker
