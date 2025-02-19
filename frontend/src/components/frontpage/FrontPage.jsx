@@ -1,5 +1,6 @@
 import NavBar from "../navbar/navbar"
 import MeldingsWidget from "../meldinger/MeldingsWidget"
+import VærWidget from "../vær/VærWidget"
 
 
 export default function FrontPage() {
@@ -7,9 +8,9 @@ export default function FrontPage() {
         <>
             <NavBar />
             <div className="basis-5/6 p-4 overflow-auto">
-                Dette er front page
+                <VærWidget />
             </div>
-            <MeldingsWidget></MeldingsWidget>
+            <MeldingsWidget />
         </>
     )
     }

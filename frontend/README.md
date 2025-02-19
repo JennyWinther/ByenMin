@@ -27,3 +27,6 @@ https://heropatterns.com/
 
 ## Værsymboler
 https://nrkno.github.io/yr-weather-symbols/
+
+## Ikon for app via Google OAuth
+https://www.flaticon.com/free-icon/city_9087077
