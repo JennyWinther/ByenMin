@@ -8,6 +8,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MessagePage from './components/meldinger/MessagePage.jsx';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import LoginPage from './components/navbar/LoginPage.jsx';
+import Været from './components/vær/Vær.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -15,9 +18,17 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "politiloggen",
+    path: "/politiloggen",
     element: <MessagePage />,
   },
+  {
+    path: "/vaeret",
+    element: <Været />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  }
 ])
 
 

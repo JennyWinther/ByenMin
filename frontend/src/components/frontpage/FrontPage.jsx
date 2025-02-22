@@ -7,10 +7,11 @@ export default function FrontPage() {
     return (
         <>
             <NavBar />
-            <div className="basis-5/6 p-4 overflow-auto">
+            <div className="mt-16 max-w-[100vw] lg:max-w-[90vw]">
+                <MeldingsWidget />
                 <VærWidget />
             </div>
-            <MeldingsWidget />
+            
         </>
     )
     }

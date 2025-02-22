@@ -1,11 +1,14 @@
-import NavBar from './components/navbar/navbar';
 import FrontPage from './components/frontpage/FrontPage';
 
 function App() {
   return (
-        <div className='flex flex-row h-[100vh]'>
-          <FrontPage />
-        </div>
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <div className='w-[100vw] h-[100vh] flex justify-center'>
+        <FrontPage />
+      </div>
+    </>
+    
   )
 }
 
