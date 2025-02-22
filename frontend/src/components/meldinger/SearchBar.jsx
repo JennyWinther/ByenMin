@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useKommuneFetch from "../../api/KommuneFetch";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Popper from '@mui/material/Popper';
 
 // SearchBar er et søkefelt som tar inn søkeparametre fra brukeren. Når brukeren trykker på søk, sendes disse parametrene til MessagePage, 
 // som igjen sender dem til MessageList for å hente data fra politiloggen.
@@ -13,6 +14,7 @@ export default function SearchBar({setQuery}) {
     const [kommune, setKommune] = useState("");
     const [datoFra, setDatoFra] = useState(null);
     const [datoTil, setDatoTil] = useState(null);
+    const [searchBarVisible, setSearchBarVisible] = useState(false);
 
     //Hente inn kommuner ved mounting av komponent
     const {data: kommuner, error, loading} = useKommuneFetch();
@@ -44,89 +46,121 @@ export default function SearchBar({setQuery}) {
         setDatoTil(null);
     }
 
-    const labelStyle = "font-mono text-sm text-stone-500";
-    const inputStyle = "border border-stone-400 rounded-md p-2 py-4 w-30 m-1";
+    function handleToggleSearchBar() {
+        setSearchBarVisible(prev => !prev);
+    }
+
+    const labelStyle = "font-mono text-sm text-stone-500 md:text-base block";
+    const inputStyle = "border border-stone-400 rounded-md p-2 py-4 max-w-42 m-1";
     const datePickerStyle = "border border-stone-400 rounded-lg m-1";
     const buttonStyle = "bg-stone-50 border px-2 py-1 rounded-md shadow-sm m-1 hover:bg-stone-100";
 
+
+    let searchBarStyle = "hidden"
+    let searchButtonStyle = "w-[95vw] text-lg bg-neutral-50 rounded-md shadow-sm p-1 mt-2 self-center"
+
     return (
-        <>
-            <form onSubmit={handleSubmit}
-                className="flex flex-row gap-2 bg-neutral-50 rounded-lg shadow p-4 m-4 w-3/4"
-                >
-                <div>
-                    <label className={labelStyle}>Kategori</label>
-                    <input
-                        type="text"
-                        value={kategori}
-                        onChange={(e) => setKategori(e.target.value)}
-                        className={inputStyle}
-                    />
-                </div>
-                
-                <div>
-                    <label className={labelStyle}>Distrikt</label>
-                    <select name="Distrikt" 
-                            value={distrikt}
-                            onChange={(e) => setDistrikt(e.target.value)}
-                            className={inputStyle}                        
-                        >        
-                        <option value="">Velg politidistrikt</option>
-                        <option value="Oslo">Oslo Politidistrikt</option>
-                        <option value="Øst">Øst Politidistrikt</option>
-                        <option value="Innlandet">Innlandet Politidistrikt</option>
-                        <option value="SørØst">Sør-Øst Politidistrikt</option>
-                        <option value="Agder">Agder Politidistrikt</option>
-                        <option value="SørVest">Sør-Vest Politidistrikt</option>
-                        <option value="Vest">Vest Politidistrikt</option>
-                        <option value="MøreOgRomsdal">Møre og Romsdal Politidistrikt</option>
-                        <option value="Trøndelag">Trøndelag Politidistrikt</option>
-                        <option value="Nordland">Nordland Politidistrikt</option>
-                    </select>
-                </div>
+        <div className="flex flex-col">
+            <button
+                className={searchButtonStyle}
+                onClick={handleToggleSearchBar}
+            >
+                {searchBarVisible ? "Lukk søk" : "Søk"}
+            </button>
 
-                <div>
-                    <label className={labelStyle}>Kommune</label>
-                    <select value={kommune}
-                            onChange={(e) => setKommune(e.target.value)}
-                            className={inputStyle}>
+            <section 
+                className={searchBarVisible ? "" : searchBarStyle}
+            >
+                <form onSubmit={handleSubmit}
+                        className="flex flex-wrap place-content-around place-self-center mt-2 p-2 shadow-md rounded-lg lg:flex-row max-w-[95vw] bg-stone-50"
+                        >
+                        <div>
+                            <label className={labelStyle}>Kategori</label>
+                            <input
+                                type="text"
+                                value={kategori}
+                                onChange={(e) => setKategori(e.target.value)}
+                                className={inputStyle}
+                            />
+                        </div>
                         
-                        <option value="">Velg kommune</option>
-                        {kommuner.map((komm) => (
-                        <option key={komm.kommunenummer} value={komm.kommunenavn}>
-                            {komm.kommunenavnNorsk}
-                        </option>
-                        ))}
-                    </select>
-                </div>
+                        <div>
+                            <label className={labelStyle}>Distrikt</label>
+                            <select name="Distrikt" 
+                                    value={distrikt}
+                                    onChange={(e) => setDistrikt(e.target.value)}
+                                    className={inputStyle}                        
+                                >        
+                                <option value="">Velg politidistrikt</option>
+                                <option value="Oslo">Oslo Politidistrikt</option>
+                                <option value="Øst">Øst Politidistrikt</option>
+                                <option value="Innlandet">Innlandet Politidistrikt</option>
+                                <option value="SørØst">Sør-Øst Politidistrikt</option>
+                                <option value="Agder">Agder Politidistrikt</option>
+                                <option value="SørVest">Sør-Vest Politidistrikt</option>
+                                <option value="Vest">Vest Politidistrikt</option>
+                                <option value="MøreOgRomsdal">Møre og Romsdal Politidistrikt</option>
+                                <option value="Trøndelag">Trøndelag Politidistrikt</option>
+                                <option value="Nordland">Nordland Politidistrikt</option>
+                            </select>
+                        </div>
 
-                <div>
-                    <label className={labelStyle}>Dato fra</label>
-                    <DatePicker 
-                        disableFuture={true}
-                        value={datoFra}
-                        onChange={(newValue) => setDatoFra(newValue)}
-                        className={datePickerStyle}
-                    />
-                </div>
+                        <div>
+                            <label className={labelStyle}>Kommune</label>
+                            <select value={kommune}
+                                    onChange={(e) => setKommune(e.target.value)}
+                                    className={inputStyle}>
+                                
+                                <option value="">Velg kommune</option>
+                                {kommuner.map((komm) => (
+                                <option key={komm.kommunenummer} value={komm.kommunenavn}>
+                                    {komm.kommunenavnNorsk}
+                                </option>
+                                ))}
+                            </select>
+                        </div>
 
-                <div>
-                    <label className={labelStyle}>Dato til</label>
-                    <DatePicker 
-                        disableFuture={true}
-                        value={datoTil}
-                        onChange={(newValue) => setDatoTil(newValue)}
-                        className={datePickerStyle}
-                    />
-                </div>
-                <div className="flex flex-col justify-center">
-                    <input type="submit" 
-                            className={buttonStyle} />
-                    <button onClick={handleReset}
-                            className={buttonStyle}
-                        >Nullstill</button>
-                </div>
-            </form>
-        </>
+                        <div>
+                            <label className={labelStyle}>Dato fra</label>
+                            <DatePicker 
+                                disableFuture={true}
+                                value={datoFra}
+                                onChange={(newValue) => setDatoFra(newValue)}
+                                className={datePickerStyle}
+                                slotProps={{
+                                    root: {}
+                                }}
+                            />
+                        </div>
+
+                        <div>
+                            <label className={labelStyle}>Dato til</label>
+                            <DatePicker 
+                                disableFuture={true}
+                                value={datoTil}
+                                onChange={(newValue) => setDatoTil(newValue)}
+                                className={datePickerStyle}
+                                slotProps={{
+                                    textField: {
+                                        sx: {
+                                          position: 'relative',
+                                          zIndex: 'auto' // el. 0
+                                        }
+                                      }
+                                }}
+                            />
+                        </div>
+
+                        <div className="w-full flex justify-center mt-2">
+                            <input type="submit" 
+                                    className={buttonStyle} />
+                            <button onClick={handleReset}
+                                    className={buttonStyle}
+                                >Nullstill</button>
+                        </div>
+                    </form>
+            </section>
+            
+        </div>
     )
 }

@@ -12,7 +12,7 @@ export default function VærWidget(){
     // TID - VÆR - TEMP - NEDBØR - VIND - VINDBESKRIVELSE  ---- https://snl.no/Beauforts_vindskala
     return (
         <div>
-            <table className="border">
+            {/* <table className="border">
                 <tr>
                     <td>Tid</td>
                     <td>Vær</td>
@@ -24,7 +24,7 @@ export default function VærWidget(){
                 <tr>
                     HER GÅR INFO
                 </tr>
-            </table>
+            </table> */}
         </div>
     )
 }
