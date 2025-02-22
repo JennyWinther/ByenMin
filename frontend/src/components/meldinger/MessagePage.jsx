@@ -10,13 +10,18 @@ import NavBar from "../navbar/navbar";
 export default function MessagePage() {
     const [query, setQuery] = useState("http://localhost:8080/politiloggen/hentTi");
 
+    const meldingsSideStil = 'mt-16';
+
     return (
-        <div className='flex flex-row size-fit h-[100vh]'>
+        <>
             <NavBar />
-            <div className="basis-5/6 p-4 overflow-auto">
-                <SearchBar setQuery={setQuery} />
-                <MessageList query={query} />
+            <div className={meldingsSideStil}>
+                <div>
+                    <SearchBar setQuery={setQuery} />
+                    <MessageList query={query} />
+                </div>
             </div>
-        </div>
+        </>
+        
     )
     }

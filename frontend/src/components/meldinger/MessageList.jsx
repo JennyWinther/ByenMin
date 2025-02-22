@@ -10,8 +10,10 @@ export default function MessageList({ query }) {
     if(error) return <p>{error.message}</p>
     if(loading) return <p>Loading...</p>
 
+    const meldingsListeStil = "m-3 flex flex-col min-[1030px]:max-w-[50vw]";
+
     return (
-        <div className="max-w-3xl flex flex-col flex-wrap">
+        <div className={meldingsListeStil}>
             <ul>
                 {messages.map(message => (
                     <MessageItem key={message.id} message={message} />
