@@ -6,4 +6,9 @@ spring:
           google:
             clientId: google-client-id
             clientSecret: google-client-secret
-# ...
+server:
+  servlet:
+    session:
+      cookie:
+        same-site: none
+        secure: true
