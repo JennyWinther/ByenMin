@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { checkAuth } from "./helpers";
 
 // Fetch komponenten henter data fra egen REST-API, som igjen henter data fra politiets API.
 // Komponenten tar inn en URL som parameter, og henter data fra dette endepunktet. Dette er gjort for å 
@@ -15,9 +16,12 @@ export default function useFetch(url) {
         if (!url) return;
         async function getData(){
             setLoading(true);
-
+            if(!checkAuth){ return;}
             try{
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
                 const responseData = await response.json();
                 if(!response.ok){
                     throw new Error('Failed to load')
@@ -30,6 +34,7 @@ export default function useFetch(url) {
             }
         }
         getData();
+        console.log(getData());
     }, [url])
 
   return { data, error, loading };
