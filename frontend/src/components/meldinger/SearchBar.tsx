@@ -39,6 +39,12 @@ export default function SearchBar({setQuery}: itemProps) {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>){ 
         e.preventDefault();
 
+        // Field validation for kategori, da det er fri input. Regex for å forby tall. 
+        if(!/^[a-zA-ZæøåÆØÅ\s]*$/.test(kategori)){
+            alert("Kategori kan bare bestå av bokstaver og mellomrom.");
+            return;
+        }
+
         const fraStr = datoFra ? datoFra.format('YYYY-MM-DD') : "";
         const tilStr = datoTil ? datoTil.format('YYYY-MM-DD') : "";
         

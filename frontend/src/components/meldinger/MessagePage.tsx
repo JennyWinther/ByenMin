@@ -37,7 +37,7 @@ export default function MessagePage() {
           <NavBar />
           <div className={meldingsSideStil}>
             {isLoggedIn ? (
-              <div>
+              <div className="flex flex-col">
                 <SearchBar setQuery={setQuery} />
                 <MessageList query={query} />
               </div>
