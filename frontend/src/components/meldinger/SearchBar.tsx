@@ -1,39 +1,52 @@
 import { useState } from "react";
-import useKommuneFetch from "../../api/KommuneFetch";
+import { useKommuneFetch } from "../../api/KommuneFetch";
+import { Query } from "./MeldingsTyper";
+import { Kommune } from "./KommuneTyper";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Popper from '@mui/material/Popper';
+import { Dayjs } from "dayjs";
 
 // SearchBar er et søkefelt som tar inn søkeparametre fra brukeren. Når brukeren trykker på søk, sendes disse parametrene til MessagePage, 
 // som igjen sender dem til MessageList for å hente data fra politiloggen.
 
-export default function SearchBar({setQuery}) {
+interface itemProps {
+    setQuery: React.Dispatch<React.SetStateAction<Query>>;
+}
+
+export default function SearchBar({setQuery}: itemProps) {
     let queryStreng = "";
 
-    const [kategori, setKategori] = useState("");
-    const [distrikt, setDistrikt] = useState("");
-    const [kommune, setKommune] = useState("");
-    const [datoFra, setDatoFra] = useState(null);
-    const [datoTil, setDatoTil] = useState(null);
-    const [searchBarVisible, setSearchBarVisible] = useState(false);
+    const [kategori, setKategori] = useState<string>("");
+    const [distrikt, setDistrikt] = useState<string>("");
+    const [kommune, setKommune] = useState<string>("");
+    const [datoFra, setDatoFra] = useState<Dayjs | null>(null);
+    const [datoTil, setDatoTil] = useState<Dayjs | null>(null);
+    const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
 
     //Hente inn kommuner ved mounting av komponent
     const {data: kommuner, error, loading} = useKommuneFetch();
-    if(error) return <p>{error.message}</p>
+    if(error) return <p>{error}</p>
     if(loading) return <p>Loading...</p>
+    if (!kommuner) {
+        return <p>No data</p>;
+    }
+    console.log("Fetched kommuner:", kommuner);
+
 
     //Sorterer kommunene alfabetisk
-    kommuner.sort((a, b) => a.kommunenavn.localeCompare(b.kommunenavn));
+    kommuner.sort((a: Kommune, b: Kommune) => a.kommunenavn.localeCompare(b.kommunenavn));
 
     //Kompilerer Query string basert på brukerinput. Da API ikke bryr seg om tomme felter, trenger vi ikke å sjekke om feltene er tomme.
-    function handleSubmit(e){ 
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>){ 
         e.preventDefault();
 
-        const fraStr = datoFra ? datoFra.format("YYYY-MM-DD") : "";
-        const tilStr = datoTil ? datoTil.format("YYYY-MM-DD") : "";
+        const fraStr = datoFra ? datoFra.format('YYYY-MM-DD') : "";
+        const tilStr = datoTil ? datoTil.format('YYYY-MM-DD') : "";
         
         queryStreng = `http://localhost:8080/politiloggen/sok?kategori=${kategori}&distrikt=${distrikt}&kommune=${kommune}&datoFra=${fraStr}&datoTil=${tilStr}`;
         setQuery(() => {
-            return queryStreng;
+            return {
+                url: queryStreng
+            }
         });
     }
 
@@ -54,7 +67,6 @@ export default function SearchBar({setQuery}) {
     const inputStyle = "border border-stone-400 rounded-md p-2 py-4 max-w-42 m-1";
     const datePickerStyle = "border border-stone-400 rounded-lg m-1";
     const buttonStyle = "bg-stone-50 border px-2 py-1 rounded-md shadow-sm m-1 hover:bg-stone-100";
-
 
     let searchBarStyle = "hidden"
     let searchButtonStyle = "w-[95vw] text-lg bg-neutral-50 rounded-md shadow-sm p-1 mt-2 self-center"
@@ -112,7 +124,7 @@ export default function SearchBar({setQuery}) {
                                     className={inputStyle}>
                                 
                                 <option value="">Velg kommune</option>
-                                {kommuner.map((komm) => (
+                                {kommuner.map((komm: Kommune) => (
                                 <option key={komm.kommunenummer} value={komm.kommunenavn}>
                                     {komm.kommunenavnNorsk}
                                 </option>
@@ -127,9 +139,6 @@ export default function SearchBar({setQuery}) {
                                 value={datoFra}
                                 onChange={(newValue) => setDatoFra(newValue)}
                                 className={datePickerStyle}
-                                slotProps={{
-                                    root: {}
-                                }}
                             />
                         </div>
 
@@ -140,14 +149,6 @@ export default function SearchBar({setQuery}) {
                                 value={datoTil}
                                 onChange={(newValue) => setDatoTil(newValue)}
                                 className={datePickerStyle}
-                                slotProps={{
-                                    textField: {
-                                        sx: {
-                                          position: 'relative',
-                                          zIndex: 'auto' // el. 0
-                                        }
-                                      }
-                                }}
                             />
                         </div>
 

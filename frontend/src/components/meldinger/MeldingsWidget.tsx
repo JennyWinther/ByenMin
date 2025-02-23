@@ -1,4 +1,5 @@
 import MessageList from "./MessageList"
+import { Query } from "./MeldingsTyper";
 
 //Widget som henter inn 5 nyeste meldinger fra politiloggen. Skal i fremtiden være for valgt by av logget inn profil, ellers hele landet
 
@@ -10,7 +11,9 @@ export default function MeldingsWidget(){
     return (
         <div className="mt-5">
             <h1 className={headlineStil + headlineMd + headlineLg} >Siste Hendelser</h1>
-            <MessageList query="http://localhost:8080/politiloggen/hentTilWidget/horten"/>
+            <MessageList query={{
+                url: "http://localhost:8080/politiloggen/hentTilWidget/horten"}}
+            />
         </div>
     )
 }

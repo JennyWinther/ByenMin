@@ -1,15 +1,14 @@
 
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { StyledEngineProvider } from '@mui/material/styles'
-import App from './App.jsx'
+import App from './App.js'
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import MessagePage from './components/meldinger/MessagePage.jsx';
+import MessagePage from './components/meldinger/MessagePage.js';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import LoginPage from './components/navbar/LoginPage.jsx';
-import Været from './components/vær/Vær.jsx';
+import LoginPage from './components/navbar/LoginPage.js';
+import Været from './components/vær/Vær.js';
 
 
 const router = createBrowserRouter([
@@ -32,7 +31,7 @@ const router = createBrowserRouter([
 ])
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <StyledEngineProvider injectFirst>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <RouterProvider router={router} />

@@ -1,7 +1,7 @@
 
 //geoapify for å finne lat/long, sender videre til met/yr api for værmelding
 
-export default function VærWidget(){
+export function VærWidget(){
 
     //importere værdata
     //displaye det i table med ikoner fra assets

@@ -1,6 +1,6 @@
-import NavBar from "../navbar/navbar"
+import NavBar from "../navbar/NavBar"
 import MeldingsWidget from "../meldinger/MeldingsWidget"
-import VærWidget from "../vær/VærWidget"
+import { VærWidget } from "../vær/VærWidget"
 
 
 export default function FrontPage() {

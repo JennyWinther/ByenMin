@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/base": "^5.0.0-beta.69",
     "@mui/x-date-pickers": "^7.26.0",
+    "@types/react-router": "^5.1.20",
     "dayjs": "^1.11.13",
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/node": "^22.13.5",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
@@ -32,6 +34,7 @@
     "globals": "^15.14.0",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
     "vite": "^6.0.5"
   },
   "peerDependencies": {

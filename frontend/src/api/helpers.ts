@@ -1,11 +1,7 @@
 
-export function ParseDateFromUTCToLocal(date) {
+export function ParseDateFromUTCToLocal(date: string) {
     let d = new Date(date);
     return d.toLocaleString("no-NO", {day: "2-digit", month: "long", year: "numeric", hour: "numeric", minute: "numeric"});
-}
-
-export function DetermineWeatherIcon(weather){
-    
 }
 
 export async function checkAuth() {

@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import { checkAuth } from "./helpers";
+import { Kommune } from "../components/meldinger/KommuneTyper";
 
-// Fetch komponenten henter data fra egen REST-API, som igjen henter data fra politiets API.
+// Fetch komponenten henter data fra egen REST-API, som igjen henter data fra GeoNorge/Kartverkets API.
 // Komponenten tar inn en URL som parameter, og henter data fra dette endepunktet. Dette er gjort for å 
 // holde metode (hook) relativt gjenbrukbar, og omgå CORS-problematikk.
 
-// Hver komponent er anvarlig for å gi riktig URL til endepunkt.
+// Henter statisk inn en liste over alle kommuner i Norge.
+// Omdannes til mer generisk versjon hvis det er behov for fylker eller ytterligere resultater fra API.
 
-export default function useFetch(url) {
-    const [data, setData] = useState(null);
+export function useKommuneFetch() {
+    const [data, setData] = useState<Kommune[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string>("");
 
     useEffect(() => {
-        if (!url) return;
         async function getData(){
             setLoading(true);
-            if(!checkAuth){ return;}
+            const url = `http://localhost:8080/kommuner/alle`;
+            if(!checkAuth()){
+                console.log("Auth is false");
+                return { data, error, loading };
+            }
             try{
                 const response = await fetch(url, {
                     method: 'GET',
@@ -28,14 +33,13 @@ export default function useFetch(url) {
                 }
                 setData(responseData);
             } catch(error){
-                setError({message: error.message || 'Could not fetch!'});
+                setError('Could not fetch!');
             } finally{
                 setLoading(false);
             }
         }
         getData();
-        console.log(getData());
-    }, [url])
+    }, [])
 
   return { data, error, loading };
 }
