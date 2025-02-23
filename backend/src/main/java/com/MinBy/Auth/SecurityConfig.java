@@ -2,9 +2,11 @@ package com.MinBy.Auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,8 +22,14 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests(registry -> {
                 registry.requestMatchers("/", "/politiloggen/hentTilWidget/**").permitAll();
+                registry.requestMatchers("/api/me").permitAll();
                 registry.anyRequest().authenticated();
                 })
+            .exceptionHandling(e -> e
+                    .authenticationEntryPoint(
+                            new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)
+                    )
+            )
             .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl("http://localhost:5173/", true))
             .formLogin(Customizer.withDefaults());
 

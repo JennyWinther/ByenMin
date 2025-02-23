@@ -1,4 +1,4 @@
-import NavBar from "../navbar/navbar"
+import NavBar from "../navbar/NavBar"
 
 export default function Været(){
     return (

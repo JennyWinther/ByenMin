@@ -20,10 +20,10 @@ const router = createBrowserRouter([
     path: "/politiloggen",
     element: <MessagePage />,
   },
-  {
-    path: "/vaeret",
-    element: <Været />,
-  },
+  // {
+  //   path: "/vaeret",
+  //   element: <Været />,
+  // },
   {
     path: "/login",
     element: <LoginPage />,

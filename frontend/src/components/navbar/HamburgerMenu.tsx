@@ -54,9 +54,9 @@ export default function HamburgerMenu(){
                         <li className={listItemStyle}>
                             <a href="http://localhost:5173/politiloggen">Politiloggen</a>
                         </li>
-                        <li className={listItemStyle}>
+                        {/* <li className={listItemStyle}>
                             <a href="http://localhost:5173/vaeret">Været</a>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
                 
@@ -74,9 +74,9 @@ export default function HamburgerMenu(){
                     <li>
                         <a href="http://localhost:5173/politiloggen">Politiloggen</a>
                     </li>
-                    <li>
+                    {/* <li>
                             <a href="http://localhost:5173/vaeret">Været</a>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
             

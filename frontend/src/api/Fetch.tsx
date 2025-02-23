@@ -17,7 +17,13 @@ export function useFetch(url: Query) {
         if (url.url === "" || url.url === null || url.url === undefined) return;
         async function getData(){
             setLoading(true);
-            if(!checkAuth){ return "IkkeLoggetInn";}
+
+            if(!checkAuth){ 
+                setError("IkkeLoggetInn");
+                setLoading(false);
+                return;
+            }
+
             try{
                 const response = await fetch(url.url, {
                     method: 'GET',
@@ -35,7 +41,6 @@ export function useFetch(url: Query) {
             }
         }
         getData();
-        console.log(getData());
     }, [url])
 
   return { data, error, loading };

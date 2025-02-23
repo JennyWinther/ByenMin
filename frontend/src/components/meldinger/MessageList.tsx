@@ -1,6 +1,8 @@
 import { MessageItem } from "./MessageItem";
 import { Melding, Query } from "./MeldingsTyper";
 import { useFetch } from "../../api/Fetch";
+import { LoginKnapp } from "../navbar/LoginKnapp";
+import { checkAuth } from "../../api/helpers";
 
 // Komponenten bruker Fetch-komponenten for å hente data fra egen REST-API, som deretter henter fra politiets API. (Se Fetch.jsx)
 // Query kommer fra parent-komponent MessagePage, som fungerer som mellomledd mellom søkefeltet og denne komponenten. (SearchBar genererer query ved brukerinput)
@@ -10,7 +12,7 @@ interface itemProps {
 }
 
 
-export default function MessageList({query}: itemProps) {
+export default function MessageList({query}: itemProps) {    
     const {data: meldinger, error, loading} = useFetch(query);
     if(error) return <p>{error}</p>
     if(loading) return <p>Loading...</p>
