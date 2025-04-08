@@ -1,12 +1,11 @@
 import { MessageItem } from "./MessageItem";
 import { Melding, Query } from "./MeldingsTyper";
-import { useFetch } from "../../api/Fetch";
-import { LoginKnapp } from "../navbar/LoginKnapp";
-import { checkAuth } from "../../api/helpers";
+import useFetch from "../../api/Fetch";
 
 // Komponenten bruker Fetch-komponenten for å hente data fra egen REST-API, som deretter henter fra politiets API. (Se Fetch.jsx)
 // Query kommer fra parent-komponent MessagePage, som fungerer som mellomledd mellom søkefeltet og denne komponenten. (SearchBar genererer query ved brukerinput)
 // I bruk på forsiden, får den inn en relativt statisk querystreng som inneholder valgt kommune. 
+
 interface itemProps {
     query: Query;
 }
