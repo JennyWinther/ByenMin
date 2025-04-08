@@ -1,16 +1,12 @@
 package com.MinBy.Entiteter.GeoapifySted;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
 public class Stedsinformasjon {
 
     // Denne klassen inneholder resultatinformasjon fra Geoapify (Se VaerService)
     // Det viktigste her er Latitude og Longitude (lat/lon), da dette må videre til api.met.no.
 
-
-    @Id
     private String place_id;
     private String county;
     private String city;

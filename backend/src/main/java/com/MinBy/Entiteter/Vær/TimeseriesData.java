@@ -4,8 +4,6 @@ import com.MinBy.Entiteter.Vær.DetaljKlasser.InstantWrapper;
 import com.MinBy.Entiteter.Vær.DetaljKlasser.Fremtidsvarsel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Embedded;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TimeseriesData {

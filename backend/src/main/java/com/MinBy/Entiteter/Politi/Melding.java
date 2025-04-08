@@ -1,16 +1,13 @@
 package com.MinBy.Entiteter.Politi;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.time.OffsetDateTime;
 
-@Entity
 public class Melding {
 
     // Entitet for politimeldinger. Basert på eksempelmelding gitt i Politiloggens API.
 
-    @Id
     private String id;
     private String threadId;
     private String category;

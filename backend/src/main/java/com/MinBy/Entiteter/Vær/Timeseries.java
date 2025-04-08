@@ -3,7 +3,6 @@ package com.MinBy.Entiteter.Vær;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
 public class Timeseries {
 
     // Nest ytterste wrapping, inneholder alle Timeseries (data per klokkeslett/dato)

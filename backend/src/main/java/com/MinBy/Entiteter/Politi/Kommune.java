@@ -1,15 +1,12 @@
 package com.MinBy.Entiteter.Politi;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
 public class Kommune {
 
     // Kommune hentes fra Kartverket sin API. Dette er eksklusivt for å kunne hente en liste med oppdaterte
     // navn, som kan listes i søkebar i frontend.
 
-    @Id
     private String kommunenummer;
     private String kommunenavn;
     private String kommunenavnNorsk;
