@@ -2,6 +2,7 @@ import NavBar from "../navbar/NavBar"
 import MeldingsWidget from "../meldinger/MeldingsWidget"
 import { VærWidget } from "../vær/VærWidget"
 
+// Første siden bruker ser. 
 
 export default function FrontPage() {
     return (
