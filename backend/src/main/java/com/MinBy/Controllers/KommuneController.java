@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
+
+// Controller for kommuner.
+
+// Endpoint for å hente liste av alle kommuner:     /alle
+
 @RestController
 @RequestMapping("/kommuner")
 @CrossOrigin
 public class KommuneController {
-
-//    Henter data fra Kartverket sin API, spesifikt en liste over alle kommuner i Norge. Har ingenting
-//    med værinformasjon å gjøre.
-
     private String kommuneUrl = "https://api.kartverket.no/kommuneinfo/v1/kommuner";
     RestTemplate restTemplate = new RestTemplate();
 

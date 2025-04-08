@@ -7,22 +7,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Enkelt endepunkt for å hente vær på ett sted.
 @RestController
 @RequestMapping("/vaeret/")
 @CrossOrigin
 public class VærController {
-
-    // Endepunkter for å hente værinformasjon fra API.
-
     @Autowired
     VærService værService;
 
-    @GetMapping(value = "forsideVær/{sted}")
+    @GetMapping(value = "forsideVaer/{sted}")
     private List<VaerDataResponsDTO> HentVaeretIdag(@PathVariable String sted){
         return værService.HentVaeretIdag(sted);
     }
-
-
-
 
 }
