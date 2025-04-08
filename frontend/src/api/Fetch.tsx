@@ -8,40 +8,48 @@ import { Melding, Query } from "../components/meldinger/MeldingsTyper";
 
 // Hver komponent er anvarlig for å gi riktig URL til endepunkt.
 
-export function useFetch(url: Query) {
+const useFetch = (url: Query | null) => {
     const [data, setData] = useState<Melding[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string>("");
 
     useEffect(() => {
-        if (url.url === "" || url.url === null || url.url === undefined) return;
-        async function getData(){
-            setLoading(true);
-
-            if(!checkAuth){ 
-                setError("IkkeLoggetInn");
-                setLoading(false);
-                return;
-            }
-
-            try{
-                const response = await fetch(url.url, {
-                    method: 'GET',
-                    credentials: 'include'
-                });
-                const responseData = await response.json();
-                if(!response.ok){
-                    throw new Error('Failed to load')
-                }
-                setData(responseData);
-            } catch(error){
-                setError('Could not fetch!');
-            } finally{
-                setLoading(false);
-            }
+        if (url === null || url.url === "" || url.url === null || url.url === undefined){
+            return;
         }
-        getData();
-    }, [url])
+        else {
+            async function getData(){
+                setLoading(true);
+    
+                if(!checkAuth){ 
+                    setError("IkkeLoggetInn");
+                    setLoading(false);
+                    return;
+                }
+                
+                try{
+                    const response = await fetch(url.url, {
+                        method: 'GET',
+                        credentials: 'include'
+                    });
+                    const responseData = await response.json();
+                    if(!response.ok){
+                        throw new Error('Failed to load')
+                    }
+                    setData(responseData);
+                } catch(error){
+                    setError('Could not fetch!');
+                } finally{
+                    setLoading(false);
+                }
+            }
+            getData();
+        }
+        
+
+    }, [url?.url])
 
   return { data, error, loading };
 }
+
+export default useFetch;
