@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useKommuneFetch } from "../../api/KommuneFetch";
 import { Query } from "./MeldingsTyper";
 import { Kommune } from "./KommuneTyper";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Dayjs } from "dayjs";
+import { checkAuth } from "../../api/helpers";
+import { useNavigate } from "react-router-dom";
 
 // SearchBar er et søkefelt som tar inn søkeparametre fra brukeren. Når brukeren trykker på søk, sendes disse parametrene til MessagePage, 
 // som igjen sender dem til MessageList for å hente data fra politiloggen.
+// Kan bare brukes hvis bruker er logget inn. Hvis ikke, sendes brukeren til login-siden.
 
 interface itemProps {
     setQuery: React.Dispatch<React.SetStateAction<Query>>;
@@ -22,15 +25,38 @@ export default function SearchBar({setQuery}: itemProps) {
     const [datoTil, setDatoTil] = useState<Dayjs | null>(null);
     const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
 
-    //Hente inn kommuner ved mounting av komponent
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        
+        async function authInit() {
+            setIsLoading(true);
+            const result = await checkAuth();
+            if (!result) {
+                navigate("/login");
+            }
+            else if( result === null){
+                return <>
+                    <p>Laster...</p>;
+                </>;
+            }
+        };
+        authInit();
+        setIsLoading(false);
+    }, []);
+
     const {data: kommuner, error, loading} = useKommuneFetch();
     if(error) return <p>{error}</p>
     if(loading) return <p>Loading...</p>
     if (!kommuner) {
         return <p>No data</p>;
     }
-    console.log("Fetched kommuner:", kommuner);
 
+    
+    if (isLoading) {
+        return <p>Laster...</p>;
+    }
 
     //Sorterer kommunene alfabetisk
     kommuner.sort((a: Kommune, b: Kommune) => a.kommunenavn.localeCompare(b.kommunenavn));
