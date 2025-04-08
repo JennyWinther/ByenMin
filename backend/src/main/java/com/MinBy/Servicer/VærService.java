@@ -57,7 +57,7 @@ public class VærService {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("User-Agent", "jenny1_2_3@hotmail.com, https://github.com/JennyWinther/ByenMin");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
 
         // Hente respons med vær fra compact-versjonen av API.
         ResponseEntity<YttersteVærWrapper> råRespons = restTemplate.exchange(
