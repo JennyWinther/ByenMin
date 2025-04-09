@@ -74,7 +74,7 @@ export default function SearchBar({setQuery}: itemProps) {
         const fraStr = datoFra ? datoFra.format('YYYY-MM-DD') : "";
         const tilStr = datoTil ? datoTil.format('YYYY-MM-DD') : "";
         
-        queryStreng = `${process.env.API_BACKEND_URL}/politiloggen/sok?kategori=${kategori}&distrikt=${distrikt}&kommune=${kommune}&datoFra=${fraStr}&datoTil=${tilStr}`;
+        queryStreng = `${import.meta.env.VITE_API_BACKEND_URL}/politiloggen/sok?kategori=${kategori}&distrikt=${distrikt}&kommune=${kommune}&datoFra=${fraStr}&datoTil=${tilStr}`;
         setQuery(() => {
             return {
                 url: queryStreng

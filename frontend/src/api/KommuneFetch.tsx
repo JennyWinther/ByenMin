@@ -17,7 +17,7 @@ export function useKommuneFetch() {
     useEffect(() => {
         async function getData(){
             setLoading(true);
-            const url = `${process.env.API_BACKEND_URL}/kommuner/alle`;
+            const url = `${import.meta.env.VITE_API_BACKEND_URL}/kommuner/alle`;
             if(!checkAuth()){
                 console.log("Auth is false");
                 return { data, error, loading };

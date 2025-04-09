@@ -38,7 +38,7 @@ export default function Navbar() {
 
             <div className="absolute top-5 md:top-2 left-[48vw]">
                 <a
-                    href={`${process.env.FRONTEND_URL}`}
+                    href={`${import.meta.env.VITE_FRONTEND_URL}`}
                     className="font-mono text-xl md:text-3xl text-stone-200 hover:decoration-solid decoration-stone-200 ">MinBy</a>
             </div>
             

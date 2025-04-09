@@ -53,7 +53,7 @@ export default function ProfilSide(){
         e.preventDefault();
 
         try{
-            const response = await fetch(`${process.env.API_BACKEND_URL}/bruker/oppdaterHjemKommune/` + kommune, {
+            const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/bruker/oppdaterHjemKommune/` + kommune, {
                 method: "PUT",
                 credentials: "include",
                 headers: {

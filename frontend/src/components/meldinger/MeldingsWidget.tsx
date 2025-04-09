@@ -23,15 +23,15 @@ export default function MeldingsWidget(){
                     setBrukerInfo(bruker);
                     
                     if (bruker && bruker.hjemkommune) {
-                        setURL(`${process.env.API_BACKEND_URL}/politiloggen/hentTilWidget/` + bruker.hjemkommune);
+                        setURL(`${import.meta.env.VITE_API_BACKEND_URL}/politiloggen/hentTilWidget/` + bruker.hjemkommune);
                     } else {
-                        setURL(`${process.env.API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
+                        setURL(`${import.meta.env.VITE_API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
                     }
                 } catch (error) {
-                    setURL(`${process.env.API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
+                    setURL(`${import.meta.env.VITE_API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
                 }
             } else {
-                setURL(`${process.env.API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
+                setURL(`${import.meta.env.VITE_API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
             }
         };
 

@@ -15,7 +15,7 @@ export function ParseDateFromUTCToLocal(date: string) {
 export async function checkAuth() {
   
     try {
-      const response = await fetch(`${process.env.API_BACKEND_URL}/bruker/me`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/bruker/me`, {
         method: "GET",
         credentials: "include",
       });
@@ -41,7 +41,7 @@ export async function checkAuth() {
 // Den returnerer brukerens informasjon i JSON-format.
 export async function hentBrukerInfo() {
     try {
-        const response = await fetch(`${process.env.API_BACKEND_URL}/bruker/hentBrukerInfo`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/bruker/hentBrukerInfo`, {
             method: "GET",
             credentials: "include",
         });
@@ -61,7 +61,7 @@ export async function hentBrukerInfo() {
 export async function registerUser(data: Bruker) {
   console.log(data);
   try{
-    const response = await fetch(`${process.env.API_BACKEND_URL}/bruker/registrer`, {
+    const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/bruker/registrer`, {
       method: "POST",
       credentials: "include",
       headers: {

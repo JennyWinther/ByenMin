@@ -34,7 +34,7 @@ export default function LoginPage(){
         e.preventDefault();
 
         try{
-            const response = await fetch(`${process.env.API_BACKEND_URL}/login`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
@@ -103,7 +103,7 @@ export default function LoginPage(){
             <section className="flex flex-col items-center mt-10">
                 <a 
                     className={buttonStyle}
-                    href="http://localhost:8080/oauth2/authorization/google">Google Login</a>
+                    href={`${import.meta.env.VITE_API_BACKEND_URL}/oauth2/authorization/google`}>Google Login</a>
                 <a 
                     className={buttonStyle}
                     href="/registrer">Logg inn / Registrer</a>

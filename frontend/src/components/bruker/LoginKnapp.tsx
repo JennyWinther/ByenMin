@@ -9,7 +9,7 @@ export function LoginKnapp(){
     return (
         <a 
             className={buttonStyle + buttonMd + buttonLg}
-            href={`${process.env.FRONTEND_URL}/login`}>Logg inn
+            href={`${import.meta.env.VITE_FRONTEND_URL}/login`}>Logg inn
         </a>
     )
 }

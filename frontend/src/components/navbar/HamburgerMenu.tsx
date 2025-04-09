@@ -10,9 +10,9 @@ export default function HamburgerMenu(){
 
     const [menuToggle, setMenuToggle] = useState(false);
 
-    const frontendUrl = process.env.FRONTEND_URL;
-    const politiUrl = process.env.FRONTEND_URL + "/politiloggen";
-    const vaeretUrl = process.env.FRONTEND_URL + "/vaeret";
+    const frontendUrl = import.meta.env.VITE_FRONTEND_URL;
+    const politiUrl = import.meta.env.VITE_FRONTEND_URL + "/politiloggen";
+    const vaeretUrl = import.meta.env.VITE_FRONTEND_URL + "/vaeret";
 
     return (
         <div>

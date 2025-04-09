@@ -28,7 +28,7 @@ export default function MessagePage() {
             navigate("/login");
           }
           else{
-            setQuery({url: `${process.env.API_BACKEND_URL}/politiloggen/hentTi`});
+            setQuery({url: `${process.env.VITE_API_BACKEND_URL}/politiloggen/hentTi`});
           }
         })();
     }, []);

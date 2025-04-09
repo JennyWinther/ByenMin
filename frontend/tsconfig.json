@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true
   },
-  "include": ["src", "vite.config.ts"],            // Adjust based on your folder structure
+  "include": ["src", "vite.config.ts", "vite-env.d.ts"],            // Adjust based on your folder structure
   "exclude": ["node_modules"]
 }
 

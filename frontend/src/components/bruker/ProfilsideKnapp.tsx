@@ -10,7 +10,7 @@ export function ProfilSideKnapp(){
     return (
         <a 
             className={buttonStyle + buttonMd + buttonLg}
-            href={`${process.env.FRONTEND_URL}/profil`}>Min Side
+            href={`${import.meta.env.VITE_FRONTEND_URL}/profil`}>Min Side
         </a>
     )
 }
