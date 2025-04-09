@@ -27,7 +27,7 @@ export default function ProfilSide(){
             if (bruker.hjemkommune) {
                 setKommune(bruker.hjemkommune);
             } else {
-                setKommune(""); // Sett en tom streng som default
+                setKommune("");
             }
         })();
     }, []);
@@ -53,7 +53,7 @@ export default function ProfilSide(){
         e.preventDefault();
 
         try{
-            const response = await fetch("http://localhost:8080/bruker/oppdaterHjemKommune/" + kommune, {
+            const response = await fetch(`${process.env.API_BACKEND_URL}/bruker/oppdaterHjemKommune/` + kommune, {
                 method: "PUT",
                 credentials: "include",
                 headers: {

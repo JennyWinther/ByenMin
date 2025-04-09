@@ -19,10 +19,6 @@ export default function MessagePage() {
 
     const meldingsSideStil = 'mt-16';
 
-    const buttonStyle = "p-2 px-3 font-mono text-md text-stone-900 bg-stone-300 rounded-md shadow-md";
-    const buttonMd = " md:px-3 md:text-xl";
-    const buttonLg = " lg:px-4 lg:text-2xl"
-
     useEffect(() => {
         (async () => {
           const result = await checkAuth();
@@ -32,7 +28,7 @@ export default function MessagePage() {
             navigate("/login");
           }
           else{
-            setQuery({url: "http://localhost:8080/politiloggen/hentTi"});
+            setQuery({url: `${process.env.API_BACKEND_URL}/politiloggen/hentTi`});
           }
         })();
     }, []);

@@ -2,6 +2,7 @@ package com.MinBy.Auth.Sikkerhet;
 
 import com.MinBy.Auth.UserDetails.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +23,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 // CSRF er disabled pga. problemer med login.
 @Configuration
 public class SecurityConfig {
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     @Autowired
     private CustomAuthEntryPoint unauthorizedHandler;
@@ -58,7 +61,7 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins(frontendUrl)
                         .allowCredentials(true)
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .exposedHeaders("Authorization", "Location");

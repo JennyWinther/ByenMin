@@ -21,17 +21,17 @@ export default function MeldingsWidget(){
                 try {
                     let bruker = await hentBrukerInfo();
                     setBrukerInfo(bruker);
-
+                    
                     if (bruker && bruker.hjemkommune) {
-                        setURL("http://localhost:8080/politiloggen/hentTilWidget/" + bruker.hjemkommune);
+                        setURL(`${process.env.API_BACKEND_URL}/politiloggen/hentTilWidget/` + bruker.hjemkommune);
                     } else {
-                        setURL("http://localhost:8080/politiloggen/hentTilWidget/oslo");
+                        setURL(`${process.env.API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
                     }
                 } catch (error) {
-                    setURL("http://localhost:8080/politiloggen/hentTilWidget/oslo");
+                    setURL(`${process.env.API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
                 }
             } else {
-                setURL("http://localhost:8080/politiloggen/hentTilWidget/oslo");
+                setURL(`${process.env.API_BACKEND_URL}/politiloggen/hentTilWidget/oslo`);
             }
         };
 

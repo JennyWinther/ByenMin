@@ -9,7 +9,7 @@ export function LoginKnapp(){
     return (
         <a 
             className={buttonStyle + buttonMd + buttonLg}
-            href="http://localhost:5173/login">Logg inn
+            href={`${process.env.FRONTEND_URL}/login`}>Logg inn
         </a>
     )
 }

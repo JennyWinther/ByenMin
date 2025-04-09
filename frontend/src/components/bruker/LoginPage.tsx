@@ -34,7 +34,7 @@ export default function LoginPage(){
         e.preventDefault();
 
         try{
-            const response = await fetch("http://localhost:8080/login", {
+            const response = await fetch(`${process.env.API_BACKEND_URL}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"

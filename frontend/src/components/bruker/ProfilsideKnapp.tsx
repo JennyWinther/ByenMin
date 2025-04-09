@@ -10,7 +10,7 @@ export function ProfilSideKnapp(){
     return (
         <a 
             className={buttonStyle + buttonMd + buttonLg}
-            href="http://localhost:5173/profil">Min Side
+            href={`${process.env.FRONTEND_URL}/profil`}>Min Side
         </a>
     )
 }

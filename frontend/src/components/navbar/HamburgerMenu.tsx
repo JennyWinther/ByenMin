@@ -10,6 +10,10 @@ export default function HamburgerMenu(){
 
     const [menuToggle, setMenuToggle] = useState(false);
 
+    const frontendUrl = process.env.FRONTEND_URL;
+    const politiUrl = process.env.FRONTEND_URL + "/politiloggen";
+    const vaeretUrl = process.env.FRONTEND_URL + "/vaeret";
+
     return (
         <div>
             <section
@@ -43,19 +47,19 @@ export default function HamburgerMenu(){
                         <line x1="18" y1="6" x2="6" y2="18" />
                         <line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
-
+                    
                     <ul 
                         id="desktopMeny"
                         className={listStyle}
                     >
                         <li className={listItemStyle}>
-                            <a href="http://localhost:5173/">Forside</a>
+                            <a href={frontendUrl}>Forside</a>
                         </li>
                         <li className={listItemStyle}>
-                            <a href="http://localhost:5173/politiloggen">Politiloggen</a>
+                            <a href={politiUrl}>Politiloggen</a>
                         </li>
                         <li className={listItemStyle}>
-                            <a href="http://localhost:5173/vaeret">Været</a>
+                            <a href={vaeretUrl}>Været</a>
                         </li>
                     </ul>
                 </div>
@@ -69,13 +73,13 @@ export default function HamburgerMenu(){
                     className="hidden lg:flex lg:flex-row lg:m-2 lg:justify-around  lg:align-middle w-96  lg:text-stone-200 lg:text-xl lg:text-nowrap decoration-solid decoration-1 decoration-gray-900"
                 >
                     <li>
-                        <a href="http://localhost:5173/">Forside</a>
+                        <a href={frontendUrl}>Forside</a>
                     </li>
                     <li>
-                        <a href="http://localhost:5173/politiloggen">Politiloggen</a>
+                        <a href={politiUrl}>Politiloggen</a>
                     </li>
                     <li>
-                            <a href="http://localhost:5173/vaeret">Været</a>
+                            <a href={vaeretUrl}>Været</a>
                     </li>
                 </ul>
             </div>

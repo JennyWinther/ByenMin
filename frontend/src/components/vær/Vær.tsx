@@ -28,7 +28,7 @@ export default function Været(){
                         setBrukerInfo(bruker);
     
                         if (bruker && bruker.hjemkommune) {
-                            setURL("http://localhost:8080/vaeret/forsideVaer/" + bruker.hjemkommune);
+                            setURL(`${process.env.API_BACKEND_URL}/vaeret/forsideVaer/` + bruker.hjemkommune);
                         } else {
                           navigate("/login");
                         }
