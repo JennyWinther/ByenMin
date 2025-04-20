@@ -1,8 +1,8 @@
 import { Vær } from "../components/vær/VærTyper";
-import { Bruker } from "../components/bruker/BrukerTyper";
+import { Bruker, BrukerInfo } from "../components/bruker/BrukerTyper";
+import { CsrfContextType } from "./CsrfType";
 
 // Diverse hjelpefunksjoner for å håndtere datoer og tidspunkter i applikasjonen.
-
 
 // Funksjon for å konvertere en dato i UTC-format til lokal datoformat (norsk).
 export function ParseDateFromUTCToLocal(date: string) {
@@ -12,39 +12,41 @@ export function ParseDateFromUTCToLocal(date: string) {
 
 // Funksjon for å sjekke om brukeren er autentisert ved å sende en GET-forespørsel til backend.
 // Den returnerer true hvis brukeren er logget inn, ellers false.
-export async function checkAuth() {
-  
+export async function checkAuth(csrfContext: CsrfContextType): Promise<boolean>  {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/bruker/me`, {
         method: "GET",
         credentials: "include",
       });
+
+      const nyCsrfToken = hentCsrfTokenFraHeader(csrfContext, response);
+      csrfContext.updateCsrfToken(nyCsrfToken);
   
       if (response.ok) {
         const data = await response.text();
-        console.log("User is logged in:", data);
         return true;
       } else if (response.status === 401) {
-        console.log("User is not logged in:", response.status);
         return false;
       } else {
-        console.error("Unexpected status:", response.status);
         return false;
       }
     } catch (error) {
-      console.error("Fetch error:", error);
       return false;
     }
 }
 
 // Funksjon for å hente brukerens informasjon fra backend ved å sende en GET-forespørsel.
 // Den returnerer brukerens informasjon i JSON-format.
-export async function hentBrukerInfo() {
+export async function hentBrukerInfo(csrfContext: CsrfContextType): Promise<BrukerInfo | null>  {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/bruker/hentBrukerInfo`, {
             method: "GET",
             credentials: "include",
         });
+
+        const nyCsrfToken = hentCsrfTokenFraHeader(csrfContext, response);
+        csrfContext.updateCsrfToken(nyCsrfToken);
+
         if (!response.ok) {
             throw new Error("Failed to fetch user info");
         }
@@ -58,14 +60,14 @@ export async function hentBrukerInfo() {
 
 // Funksjon for å registrere en ny bruker ved å sende en POST-forespørsel med brukerens informasjon.
 // Den tar inn et objekt av typen Bruker (BrukerTyper.ts) som inneholder brukernavn, passord og e-postadresse.
-export async function registerUser(data: Bruker) {
-  console.log(data);
+export async function registerUser(csrfContext: CsrfContextType, data : Bruker): Promise<boolean>  {
   try{
     const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/bruker/registrer`, {
       method: "POST",
       credentials: "include",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfContext.csrfToken ?? ""
       },
       body: JSON.stringify(({
         brukernavn: data.brukernavn,
@@ -73,18 +75,17 @@ export async function registerUser(data: Bruker) {
         email: data.email
      }))
     });
-    console.log(response);
+
+    const nyCsrfToken = hentCsrfTokenFraHeader(csrfContext, response);
+    csrfContext.updateCsrfToken(nyCsrfToken);
 
     if(!response.ok){
-      console.log("Registration failed:");
       return false;
     }else{
-      console.log("Registration successful!");
       return true; 
     }
   } 
   catch(error){
-    console.error("Registration error:", error);
     return false;
   }
 }
@@ -107,4 +108,20 @@ export function ParseKlokkeslettFraUTC(date: string) {
     let d = new Date(date);
     return d.toLocaleString("no-NO", {hour: "numeric", minute: "numeric"});
 }
-  
+
+
+// Hjelpefunksjon for å hente CSRF token fra response headers
+export function hentCsrfTokenFraHeader(csrfContext: CsrfContextType, response : Response): string  {
+  let header = response.headers.get("x-csrf-token");
+
+  if(header === null){
+    return "";
+  }
+  let nyCsrfToken = decodeURIComponent(header);
+
+  if(nyCsrfToken === null){
+    return "";
+  }
+  csrfContext.updateCsrfToken(nyCsrfToken);
+  return nyCsrfToken;
+}
