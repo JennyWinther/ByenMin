@@ -2,6 +2,7 @@ import { useState } from "react";
 import { registerUser } from "../../api/helpers";
 import { useNavigate } from "react-router";
 import Navbar from "../navbar/NavBar";
+import { useCsrfContext } from "../../api/CsrfContext";
 
 // Side for å registrere ny bruker.
 // Bruker kan registrere seg med brukernavn, passord og epost. Passord må gjentas for å unngå skrivefeil.
@@ -12,8 +13,11 @@ export default function RegisterUserPage(){
     const [passordGjenta, setPassordGjenta] = useState<string>("");
     const [epost, setEpost] = useState<string>("");
     const [result, setResult] = useState<boolean | undefined>(undefined);
+    const csrfContext = useCsrfContext();
 
     const navigate = useNavigate();
+
+    const buttonStyle = "m-2 p-2 w-52 font-mono text-nowrap text-xs text-stone-900 bg-stone-200 rounded-md shadow-lg text-center";
 
     function findResult(){
         if(result === true){
@@ -51,7 +55,7 @@ export default function RegisterUserPage(){
         }
 
         try{
-            const response = await registerUser(data);
+            const response = await registerUser(csrfContext, data);
             setResult(response);
         } catch (error){
             console.error("Error during registration:", error);
@@ -113,6 +117,11 @@ export default function RegisterUserPage(){
                 </form>
             </div>
 
+            <section className="flex flex-col items-center mt-10">
+                <a 
+                    className={buttonStyle}
+                    href={`${import.meta.env.VITE_FRONTEND_URL}/login`}>Logg inn</a>
+            </section>
         </div>
     )
 

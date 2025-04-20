@@ -4,6 +4,7 @@ import MeldingsWidget from "../meldinger/MeldingsWidget"
 // Første siden bruker ser. 
 
 export default function FrontPage() {
+
     return (
         <>
             <NavBar />

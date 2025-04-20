@@ -1,6 +1,7 @@
 import MessageList from "./MessageList"
 import { useEffect, useState } from "react";
 import { hentBrukerInfo, checkAuth } from "../../api/helpers";
+import { useCsrfContext } from "../../api/CsrfContext";
 
 // Widget som henter inn 5 nyeste meldinger fra politiloggen. Vises på forsiden av appen.
 // Henter kommune fra brukerinfo, og sender dette til backend for å hente meldinger fra politiloggen.
@@ -11,15 +12,16 @@ export default function MeldingsWidget(){
     const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
     const [brukerInfo, setBrukerInfo] = useState<any | null>(null);
     const [URL, setURL] = useState<string | null>(null);
+    const csrfContext = useCsrfContext();
 
     useEffect(() => {
         async function authInit(){
-            const result = await checkAuth();
+            const result = await checkAuth(csrfContext);
             setIsLoggedIn(result);
     
             if (result) {
                 try {
-                    let bruker = await hentBrukerInfo();
+                    let bruker = await hentBrukerInfo(csrfContext);
                     setBrukerInfo(bruker);
                     
                     if (bruker && bruker.hjemkommune) {
