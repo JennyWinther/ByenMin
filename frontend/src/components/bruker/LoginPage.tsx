@@ -1,6 +1,8 @@
 import Navbar from "../navbar/NavBar";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { hentCsrfTokenFraHeader } from "../../api/helpers";
+import { useCsrfContext } from "../../api/CsrfContext";
 
 // Login side for brukeren.
 // Brukeren kan logge inn med brukernavn og passord, eller med Google OAuth2.
@@ -9,6 +11,8 @@ export default function LoginPage(){
     const [brukernavn, setBrukernavn] = useState<string>("");
     const [passord, setPassord] = useState<string>("");
     const [result, setResult] = useState<boolean | undefined>(undefined);
+    const csrfContext = useCsrfContext();
+
 
     const navigate = useNavigate();
 
@@ -34,10 +38,12 @@ export default function LoginPage(){
         e.preventDefault();
 
         try{
+            
             const response = await fetch(`${import.meta.env.VITE_API_BACKEND_URL}/login`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRF-TOKEN": csrfContext.csrfToken ?? ""
                 },
                 credentials: "include",
                 body: new URLSearchParams({
@@ -45,6 +51,10 @@ export default function LoginPage(){
                         password: passord
                     }).toString()
             });
+
+            const nyCsrfToken = hentCsrfTokenFraHeader(csrfContext, response);
+            csrfContext.updateCsrfToken(nyCsrfToken);
+
             console.log(response);
             if (!response.ok) {
                 setResult(false);
@@ -106,7 +116,7 @@ export default function LoginPage(){
                     href={`${import.meta.env.VITE_API_BACKEND_URL}/oauth2/authorization/google`}>Google Login</a>
                 <a 
                     className={buttonStyle}
-                    href="/registrer">Logg inn / Registrer</a>
+                    href={`${import.meta.env.VITE_FRONTEND_URL}/registrer`}>Registrer ny bruker</a>
             </section>
             
         </div>
