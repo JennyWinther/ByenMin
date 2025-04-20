@@ -1,6 +1,7 @@
 package com.MinBy.Controllers;
 
 import com.MinBy.Entiteter.Politi.Kommune;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/kommuner")
-@CrossOrigin
+@CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
 public class KommuneController {
     private String kommuneUrl = "https://api.kartverket.no/kommuneinfo/v1/kommuner";
     RestTemplate restTemplate = new RestTemplate();

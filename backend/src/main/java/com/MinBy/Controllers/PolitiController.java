@@ -2,6 +2,7 @@ package com.MinBy.Controllers;
 import com.MinBy.Entiteter.Politi.Melding;
 import com.MinBy.Servicer.PolitiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/politiloggen")
-@CrossOrigin
+@CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
 public class PolitiController {
     @Autowired
     PolitiService politiService;

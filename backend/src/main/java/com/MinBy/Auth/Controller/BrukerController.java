@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.web.csrf.CsrfToken;
 
 import java.security.Principal;
 import java.util.Map;
@@ -27,7 +28,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/bruker")
-@CrossOrigin
+@CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
 public class BrukerController {
     BrukerService brukerService;
 
@@ -68,7 +69,9 @@ public class BrukerController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<?> me(Principal principal) {
+    public ResponseEntity<?> me(Principal principal, CsrfToken token) {
+        //System.out.println("PRINCIPAL: " + principal);
+        //System.out.println("Token: " + token.getToken());
         if (principal == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in");
         }
