@@ -9,5 +9,5 @@ export type BrukerInfo =
 {
     brukernavn: string;
     email: string;
-    hjemKommune: string;
+    hjemkommune: string;
 }
