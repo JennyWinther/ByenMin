@@ -6,6 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Dayjs } from "dayjs";
 import { checkAuth } from "../../api/helpers";
 import { useNavigate } from "react-router-dom";
+import { useCsrfContext } from "../../api/CsrfContext";
 
 // SearchBar er et søkefelt som tar inn søkeparametre fra brukeren. Når brukeren trykker på søk, sendes disse parametrene til MessagePage, 
 // som igjen sender dem til MessageList for å hente data fra politiloggen.
@@ -24,6 +25,7 @@ export default function SearchBar({setQuery}: itemProps) {
     const [datoFra, setDatoFra] = useState<Dayjs | null>(null);
     const [datoTil, setDatoTil] = useState<Dayjs | null>(null);
     const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
+    const csrfContext = useCsrfContext();
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -32,7 +34,7 @@ export default function SearchBar({setQuery}: itemProps) {
         
         async function authInit() {
             setIsLoading(true);
-            const result = await checkAuth();
+            const result = await checkAuth(csrfContext);
             if (!result) {
                 navigate("/login");
             }

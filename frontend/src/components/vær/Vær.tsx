@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkAuth, hentBrukerInfo } from "../../api/helpers";
 import { groupByDate, ParseDateFromUTCToLocal, ParseKlokkeslettFraUTC } from "../../api/helpers";
+import { useCsrfContext } from "../../api/CsrfContext";
 
 // Ikon for ukjent værikon: https://www.flaticon.com/free-icons/unknown
 
@@ -14,21 +15,22 @@ export default function Været(){
     const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
     const [brukerInfo, setBrukerInfo] = useState<any | null>(null);
     const [URL, setURL] = useState<string>("");
+    const csrfContext = useCsrfContext();
 
     const navigate = useNavigate();
 
     useEffect(() => {
             (async () => {
-                const result = await checkAuth();
+                const result = await checkAuth(csrfContext);
                 setIsLoggedIn(result);
         
                 if (result) {
                     try {
-                        let bruker = await hentBrukerInfo();
+                        let bruker = await hentBrukerInfo(csrfContext);
                         setBrukerInfo(bruker);
     
                         if (bruker && bruker.hjemkommune) {
-                            setURL(`${import.meta.env.API_BACKEND_URL}/vaeret/forsideVaer/` + bruker.hjemkommune);
+                            setURL(`${import.meta.env.VITE_API_BACKEND_URL}/vaeret/forsideVaer/` + bruker.hjemkommune);
                         } else {
                           navigate("/login");
                         }
@@ -95,11 +97,11 @@ export default function Været(){
                     }
                     
                   return (
-                    <tr key={index}>
+                    <tr key={index} className="">
                         <td className={tdStil}>{ ParseKlokkeslettFraUTC(t.tidspunkt) }</td>
                         <td className={tdStil + " bg-stone-200 bg-opacity-50"}>
                             <img
-                                className="w-8 h-8 inline-block"
+                                className="w-8 h-8 md:inline-block"
                                 src={"/ikonerVær/" + værsymbol}
                                 alt="Værikon"
                             /> 
