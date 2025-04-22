@@ -82,11 +82,6 @@ public class SecurityConfig {
         };
     }
 
-//    @Bean
-//    public CsrfTokenRequestAttributeHandler csrfTokenRequestAttributeHandler() {
-//        return new CsrfTokenRequestAttributeHandler();
-//    }
-
     // Lager en AuthenticationManager.
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
