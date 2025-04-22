@@ -1,12 +1,16 @@
 # ByenMin
-En applikasjon som skal gi deg lett oversikt over de siste hendelsene, været, og flere funksjoner (etterhvert...) på ett sted.
+En applikasjon som skal gi deg lett oversikt over de siste hendelser i valgt sted, samt vær. For å unngå scope-creep stoppet jeg der, men ser muligheten for mye mer i fremtiden.
+Stort sett all kode er kommentert løpende. 
+Frontend deployet i Netlify, Backend i Render og MySQL database ligger i AWS.
 
 ## Teknologier
 - Spring Boot 
 - React JS
 - Vite
 - TailwindCSS
-- Javascript
+- Typescript
+
+- Docker for å containerize backend
 
 ## API 
 ### Politiloggen
