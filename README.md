@@ -1,4 +1,6 @@
 # ByenMin
+OBS: Oppstartstid kan være treg da backend må spinne opp hvis ikke nylig besøkt. 
+
 En applikasjon som skal gi deg lett oversikt over de siste hendelser i valgt sted, samt vær. For å unngå scope-creep stoppet jeg der, men ser muligheten for mye mer i fremtiden.
 Stort sett all kode er kommentert løpende. 
 Frontend deployet i Netlify, Backend i Render og MySQL database ligger i AWS.
